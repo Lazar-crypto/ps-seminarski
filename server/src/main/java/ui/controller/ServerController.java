@@ -49,17 +49,21 @@ public class ServerController {
     }
 
     private void stopServer() {
-        log.info("server STOPPED");
-         if (((UsersTableModel)serverForm.getTblActiveUsers().getModel()).getActiveUsers().size() > 0){
+         if(!server.getClients().isEmpty()){
+             serverForm.printError("Postoje aktivne sesije!");
+             confirmTerminateServer();
+         }else if (((UsersTableModel)serverForm.getTblActiveUsers().getModel()).getActiveUsers().size() > 0){
             serverForm.printError("Postoje aktivni korisnici!");
-           
-            if(serverForm.confirmDialog("Da li ste sigurni da zelite da ugasite server?")){
-                server.terminate();
-                serverForm.serverStopped();
-            }
+             confirmTerminateServer();
         }
-        server.terminate();
-        serverForm.serverStopped();
+    }
+
+    private void confirmTerminateServer(){
+        if(serverForm.confirmDialog("Da li ste sigurni da zelite da ugasite server?")){
+            server.terminate();
+            serverForm.serverStopped();
+            log.info("server STOPPED");
+        }
     }
     
     public void addUser(UserDTO user){

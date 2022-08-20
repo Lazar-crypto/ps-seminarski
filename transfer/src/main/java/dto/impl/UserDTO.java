@@ -1,11 +1,11 @@
 package dto.impl;
 
+import dto.DTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import java.io.Serializable;
 
 @Data @AllArgsConstructor
-public class UserDTO implements Serializable {
+public class UserDTO implements DTO {
 
     private final long id;
     private long attorneyIdentificationNumber;

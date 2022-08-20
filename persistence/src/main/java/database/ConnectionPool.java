@@ -33,7 +33,7 @@ public class ConnectionPool {
                 Thread.sleep(200);
             } catch (InterruptedException ignored) {
             }
-            return getConnection();
+            return ConnectionPool.getConnection();
         }
         
         return POOL.pop();

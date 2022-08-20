@@ -10,6 +10,7 @@ import exception.UserNotFoundException;
 import lombok.extern.java.Log;
 import mapper.UserDTOMapper;
 import operation.Operation;
+import repository.Repository;
 import server.ClientHandler;
 import ui.controller.ServerController;
 
@@ -36,8 +37,10 @@ public class Login extends Operation {
 
     @Override
     protected UserDTO concreteOperationResponse() throws Exception {
+        if(super.repository == null)
+            super.repository = new Repository();
         DAO dao = DaoFactory.create(User.class);
-        List<Entity> entities = repository.findByCondition(String.format("username = '%s' and password = '%s'", username, password), dao);
+        List<Entity> entities = super.repository.findByCondition(String.format("username = '%s' and password = '%s'", username, password), dao);
         if(entities == null || entities.stream().findFirst().isEmpty())
             throw new UserNotFoundException("Ne postoji korisnik!");
 

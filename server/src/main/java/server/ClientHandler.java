@@ -56,6 +56,7 @@ public class ClientHandler extends Thread {
             } catch (EOFException | SocketException e) {
                 //proveriti da li ovo moze ovako kada se napravi client ui
                 //da li ce kada prekinem klijenta ovde bacati ovaj ex ili moram da pravim sistemsku operaciju
+                e.printStackTrace();
                 log.info("User logged out ");
                 ServerController.getInstance().removeUser(loggedUser);
                 server.getClients().remove(this);

@@ -47,7 +47,7 @@ public class Repository {
             ResultSet rs = preparedStatement.executeQuery();
             entities = new ArrayList<>();
             while (rs.next()){
-                Entity entity = (Entity) toEntity.invoke(dao,rs);
+                Entity entity = (Entity) toEntity.invoke(dao, rs);
                 entities.add(entity);
             }
             preparedStatement.close();

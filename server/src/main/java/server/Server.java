@@ -31,10 +31,12 @@ public class Server extends Thread{
         log.info("Server listening on port: " + serverSocket.getLocalPort());
 
         while (running){
-            try (Socket socket = serverSocket.accept()) {
+            try {
+                Socket socket = serverSocket.accept();
                 ClientHandler clientHandler = new ClientHandler(socket,this);
                 clients.add(clientHandler);
                 clientHandler.start();
+                log.info("Client connected!");
 
             } catch (IOException e) {
                 //or server stopped
