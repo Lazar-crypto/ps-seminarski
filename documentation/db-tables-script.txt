@@ -1,0 +1,54 @@
+create table ps_user(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+attorneyIdentificationNumber LONG NOT NULL,
+name varchar(255) NOT NULL,
+surname varchar(255) NOT NULL,
+email varchar(50) NOT NULL,
+password varchar(50) NOT NULL
+);
+
+create table ps_clientProperty(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+name varchar(255) NOT NULL
+);
+
+create table ps_client(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+name varchar(255) NOT NULL,
+surname varchar(255) NOT NULL,
+dateOfBirth date NOT NULL,
+uniqueCitizenIdentityNumber varchar(13) NOT NULL,
+contactNumber varchar(255) NOT NULL,
+clientPropertyId INT,
+
+CONSTRAINT FK_clientProperty FOREIGN KEY (clientPropertyId) REFERENCES ps_clientProperty(id)
+);
+
+create table ps_caseType(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+name varchar(255)
+);
+
+create table ps_case(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+name varchar(255) NOT NULL,
+problem varchar(1000) NOT NULL,
+recordDate Date NOT NULL,
+userId INT,
+clientId INT,
+caseTypeId INT,
+
+CONSTRAINT FK_user FOREIGN KEY (userId) REFERENCES ps_user(id),
+CONSTRAINT FK_client FOREIGN KEY (clientId) REFERENCES ps_client(id),
+CONSTRAINT FK_caseType FOREIGN KEY (caseTypeId) REFERENCES ps_caseType(id)
+);
+
+create table ps_caseItem(
+id INT NOT NULL AUTO_INCREMENT,
+caseId INT NOT NULL,
+internalNumber INT NOT NULL,
+officialNumber INT NOT NULL,
+
+PRIMARY KEY(id,caseId),
+CONSTRAINT FK_case FOREIGN KEY (caseId) REFERENCES ps_case(id)
+);
