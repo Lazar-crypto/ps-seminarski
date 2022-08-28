@@ -8,7 +8,6 @@ import network.Response;
 import network.ResponseStatus;
 import properties.TransferProperties;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.Socket;
@@ -48,9 +47,11 @@ public class Session {
         sender.sendRequest(request);
         log.info("Request sent: " + request);
 
-        Response response = receiver.receiveRespone();
+        Response response = receiver.getResponse();
+        receiver.setResponse(null);
         log.info("Response received: " + response);
         if(response.getStatus().equals(ResponseStatus.ERROR)) throw response.getError();
+
         return response.getData();
     }
 }

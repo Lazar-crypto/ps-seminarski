@@ -11,7 +11,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public String getTableName() {
-        return "user";
+        return "ps_user";
     }
 
     @Override
@@ -35,8 +35,8 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public String findByCondition(String condition) {
         return  "SELECT *" +
-                " FROM user" +
-                " WHERE" + condition + ";";
+                " FROM " + getTableName() +
+                " WHERE " + condition + ";";
     }
 
 }

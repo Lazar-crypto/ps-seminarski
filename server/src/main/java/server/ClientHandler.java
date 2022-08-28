@@ -41,6 +41,14 @@ public class ClientHandler extends Thread {
         return socket;
     }
 
+    public ObjectOutputStream getToClient(){
+        return toClient;
+    }
+
+    public UserDTO getLoggedUser(){
+        return loggedUser;
+    }
+
     public void setLoggedUser(UserDTO loggedUser) {
         this.loggedUser = loggedUser;
     }
@@ -52,24 +60,23 @@ public class ClientHandler extends Thread {
                 Request request = (Request) fromClient.readObject();
                 Response response = handleRequest(request);
                 toClient.writeObject(response);
+                toClient.flush();
 
-            } catch (EOFException | SocketException e) {
-                //proveriti da li ovo moze ovako kada se napravi client ui
-                //da li ce kada prekinem klijenta ovde bacati ovaj ex ili moram da pravim sistemsku operaciju
-                e.printStackTrace();
-                log.info("User logged out ");
+            } catch (EOFException | SocketException e) { //means user logged out(closed session)
                 ServerController.getInstance().removeUser(loggedUser);
                 server.getClients().remove(this);
+                log.info(String.format("USER: %s logged out!",loggedUser.getEmail()));
+                break;
 
             }catch (IOException | ClassNotFoundException e) {
-                log.info("Failed reading request or sending response data from/to client: " + e.getMessage());
+                log.severe("Failed reading request or sending response data from/to client: " + e.getMessage());
+                break;
             }
         }
     }
 
     private Response handleRequest(Request request) {
         Operation operation;
-
         switch (request.getRequestType()){
             case LOGIN:
                 operation = new Login(this);

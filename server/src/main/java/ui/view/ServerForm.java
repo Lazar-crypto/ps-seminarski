@@ -2,6 +2,7 @@ package ui.view;
 
 import properties.TransferProperties;
 import ui.table.model.UsersTableModel;
+import view.dialog.DialogForm;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,13 +18,13 @@ public class ServerForm extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new JLabel();
+        JLabel jLabel1 = new JLabel();
         txtPort = new JFormattedTextField();
         btnStartServer = new JButton();
         btnStopServer = new JButton();
         lblServerStatus = new JLabel();
         pnlCurrentUsers = new JPanel();
-        scrlUsers = new JScrollPane();
+        JScrollPane scrlUsers = new JScrollPane();
         tblActiveUsers = new JTable();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -122,10 +123,8 @@ public class ServerForm extends JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton btnStartServer;
     private JButton btnStopServer;
-    private JLabel jLabel1;
     private JLabel lblServerStatus;
     private JPanel pnlCurrentUsers;
-    private JScrollPane scrlUsers;
     private JTable tblActiveUsers;
     private JFormattedTextField txtPort;
     // End of variables declaration//GEN-END:variables
@@ -137,13 +136,16 @@ public class ServerForm extends JFrame {
         btnStopServer.setEnabled(false);
     }
 
-    public void printError(String s) {
-        JOptionPane.showMessageDialog(this, s, "Greška", JOptionPane.ERROR_MESSAGE);
+    public void errorDialog(String msg, String title) {
+        DialogForm.showErrorDialog(this, msg, title);
+    }
+
+    public void warningDialog(String msg, String title){
+        DialogForm.showWarningDialog(this, msg, title);
     }
     
-    public boolean confirmDialog(String msg){
-         return JOptionPane.showConfirmDialog(this, msg, "OPREZ", 
-                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+    public boolean confirmDialog(String msg, String title){
+         return DialogForm.showConfirmDialog(this,msg,title);
     }
 
     public void serverStopped() {

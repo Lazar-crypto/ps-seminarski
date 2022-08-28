@@ -42,7 +42,7 @@ public class ServerController {
             server = new Server();
         } catch (IOException ex) {
              log.info("Cannot instantiate Server");
-            serverForm.printError("Greska prilikom pokretanja servera!");
+            serverForm.errorDialog("Greska prilikom pokretanja servera!","Greska");
         }
          server.start();
          serverForm.serverStarted();
@@ -50,22 +50,19 @@ public class ServerController {
 
     private void stopServer() {
          if(!server.getClients().isEmpty()){
-             serverForm.printError("Postoje aktivne sesije!");
-             confirmTerminateServer();
-         }else if (((UsersTableModel)serverForm.getTblActiveUsers().getModel()).getActiveUsers().size() > 0){
-            serverForm.printError("Postoje aktivni korisnici!");
-             confirmTerminateServer();
-        }
+             serverForm.warningDialog("Postoje aktivne sesije","OPREZ");
+             if(serverForm.confirmDialog("Da li ste sigurni da zelite da ugasite server?", "OPREZ")){
+                 server.terminate();
+                 serverForm.serverStopped();
+                 log.info("server STOPPED");
+             }
+             return;
+         }
+        server.terminate();
+        serverForm.serverStopped();
+        log.info("server STOPPED");
     }
 
-    private void confirmTerminateServer(){
-        if(serverForm.confirmDialog("Da li ste sigurni da zelite da ugasite server?")){
-            server.terminate();
-            serverForm.serverStopped();
-            log.info("server STOPPED");
-        }
-    }
-    
     public void addUser(UserDTO user){
         ((UsersTableModel)serverForm.getTblActiveUsers().getModel()).addUser(user);
     }

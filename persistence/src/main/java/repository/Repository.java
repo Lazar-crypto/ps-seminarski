@@ -42,6 +42,7 @@ public class Repository {
             Method toEntity = dao.getClass().getMethod("toEntity", ResultSet.class);
 
             String findQuery = (String) find.invoke(dao, condition);
+            log.info("Query for execution: " + findQuery);
 
             PreparedStatement preparedStatement = getConnection().prepareStatement(findQuery);
             ResultSet rs = preparedStatement.executeQuery();
@@ -54,7 +55,7 @@ public class Repository {
             rs.close();
 
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException | SQLException e) {
-            log.info(e.getMessage());
+            log.warning(e.getMessage());
         }
         return entities;
     }

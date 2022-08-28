@@ -4,6 +4,7 @@ import controller.UserController;
 import dto.impl.UserDTO;
 import exception.ServerUnavailableException;
 import presenter.Presenter;
+import view.dialog.DialogForm;
 import view.form.LoginForm;
 import view.form.MainForm;
 
@@ -25,22 +26,21 @@ public class MainPresenter extends Presenter {
             String username = loginForm.getTxtUsername().getText();
             String password = String.valueOf(loginForm.getTxtPassword().getPassword());
             if(username.isEmpty() || password.isEmpty()){
-                JOptionPane.showMessageDialog(loginForm,"Podaci ne smeju biti prazni!");
+                DialogForm.showInformationDialog(loginForm,"Podaci ne smeju biti prazni!","Probajte opet");
                 return;
             }
 
             UserDTO user = UserController.getInstance().login(loginForm.getTxtUsername().getText(),
                     new String(loginForm.getTxtPassword().getPassword()));
             loginForm.dispose();
-            JOptionPane.showMessageDialog(loginForm,"Uspesno ste se prijavili,","Prijava",JOptionPane.INFORMATION_MESSAGE);
+            DialogForm.showInformationDialog(loginForm,"Uspesno ste se prijavili.","Prijava");
             super.form = new MainForm();
 
         }catch (ServerUnavailableException ex){
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"Greska",JOptionPane.ERROR_MESSAGE);
+            DialogForm.showErrorDialog(null, ex.getMessage(),"Greska");
 
         } catch (Exception ex){
-            System.out.println("Nesto");
-            JOptionPane.showMessageDialog(loginForm, ex.getMessage(), "Greška", JOptionPane.ERROR_MESSAGE);
+            DialogForm.showErrorDialog(loginForm, ex.getMessage(),"Greska");
         }
 
     }

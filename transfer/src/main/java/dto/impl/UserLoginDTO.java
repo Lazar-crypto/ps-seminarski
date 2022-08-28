@@ -7,6 +7,6 @@ import lombok.Data;
 @Data @AllArgsConstructor
 public class UserLoginDTO implements DTO {
 
-    private final String username;
+    private final String email;
     private final String password;
 }

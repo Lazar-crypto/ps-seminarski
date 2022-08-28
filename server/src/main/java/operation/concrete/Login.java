@@ -19,7 +19,7 @@ import java.util.List;
 @Log
 public class Login extends Operation {
 
-    private String username;
+    private String email;
     private String password;
 
     private final ClientHandler clientHandler;
@@ -31,7 +31,7 @@ public class Login extends Operation {
     @Override
     protected void adjustReceivedData() {
         UserLoginDTO userLoginDTO = (UserLoginDTO) super.receivedData;
-        username = userLoginDTO.getUsername();
+        email = userLoginDTO.getEmail();
         password = userLoginDTO.getPassword();
     }
 
@@ -40,7 +40,7 @@ public class Login extends Operation {
         if(super.repository == null)
             super.repository = new Repository();
         DAO dao = DaoFactory.create(User.class);
-        List<Entity> entities = super.repository.findByCondition(String.format("username = '%s' and password = '%s'", username, password), dao);
+        List<Entity> entities = super.repository.findByCondition(String.format("email = '%s' and password = '%s'", email, password), dao);
         if(entities == null || entities.stream().findFirst().isEmpty())
             throw new UserNotFoundException("Ne postoji korisnik!");
 

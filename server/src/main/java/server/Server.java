@@ -1,6 +1,8 @@
 package server;
 
 import lombok.extern.java.Log;
+import network.Response;
+import network.ResponseStatus;
 import properties.TransferProperties;
 
 import java.io.IOException;
@@ -26,6 +28,10 @@ public class Server extends Thread{
         return clients;
     }
 
+    public Boolean getRunning(){
+        return running;
+    }
+
     @Override
     public void run() {
         log.info("Server listening on port: " + serverSocket.getLocalPort());
@@ -39,8 +45,7 @@ public class Server extends Thread{
                 log.info("Client connected!");
 
             } catch (IOException e) {
-                //or server stopped
-                log.info("Client did not connect: " + e.getMessage());
+                log.info("Server terminated!");
             }
         }
         stopAllThreads();
@@ -52,18 +57,28 @@ public class Server extends Thread{
                 client.getSocket().close();
 
             } catch (IOException ex) {
-                log.info("Client thread failed to stop: " + ex.getMessage());
+                log.warning("Client thread failed to stop: " + ex.getMessage());
             }
         }
     }
 
     public void terminate() {
-        running = false;
         try {
+            if(!clients.isEmpty()){//before terminating server notify clients
+                Response response = new Response();
+                response.setStatus(ResponseStatus.TERMINATED);
+                for (ClientHandler client : clients) {
+                    client.getToClient().writeObject(response);
+                    if(client.getLoggedUser() != null)
+                        log.info(String.format("Terminating client program for: %s", client.getLoggedUser().getEmail()));
+                    client.getSocket().close();
+                }
+            }
+            running = false;
             serverSocket.close();
 
         } catch (IOException e) {
-            log.info("Failed to terminate server" + e.getMessage());
+            log.warning("Failed to terminate server" + e.getMessage());
         }
     }
 
