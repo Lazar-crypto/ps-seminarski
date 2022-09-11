@@ -2,11 +2,10 @@ package view.form;
 
 import javax.swing.*;
 
-public class LoginForm extends javax.swing.JDialog {
+public class LoginForm extends javax.swing.JFrame {
 
 
     public LoginForm(java.awt.Frame parent, boolean modal)  {
-        super(parent, modal);
         initComponents();
     }
 
@@ -20,7 +19,7 @@ public class LoginForm extends javax.swing.JDialog {
         lblUsername = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Prijava");
 
         lblPassword.setText("Lozinka:");

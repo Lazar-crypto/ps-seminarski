@@ -15,6 +15,7 @@ import server.ClientHandler;
 import ui.controller.ServerController;
 
 import java.util.List;
+import java.util.Objects;
 
 @Log
 public class Login extends Operation {
@@ -39,12 +40,14 @@ public class Login extends Operation {
     protected UserDTO concreteOperationResponse() throws Exception {
         if(super.repository == null)
             super.repository = new Repository();
-        DAO dao = DaoFactory.create(User.class);
-        List<Entity> entities = super.repository.findByCondition(String.format("email = '%s' and password = '%s'", email, password), dao);
-        if(entities == null || entities.stream().findFirst().isEmpty())
-            throw new UserNotFoundException("Ne postoji korisnik!");
 
-       User user = (User) entities.stream().findFirst().get();
+        User user = (User) super.repository
+                .findByCondition(String.format("email = '%s' and password = '%s'", email, password),
+                        Objects.requireNonNull(DaoFactory.create(User.class)))
+                .stream()
+                .findFirst()
+                .orElseThrow(() ->  new UserNotFoundException("Ne postoji korisnik!"));
+
        UserDTO userDto = UserDTOMapper.fromEntity(user);
        
         //dodaj usera u listu aktivnih

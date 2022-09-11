@@ -65,7 +65,8 @@ public class ClientHandler extends Thread {
             } catch (EOFException | SocketException e) { //means user logged out(closed session)
                 ServerController.getInstance().removeUser(loggedUser);
                 server.getClients().remove(this);
-                log.info(String.format("USER: %s logged out!",loggedUser.getEmail()));
+                if(loggedUser != null)
+                    log.info(String.format("USER: %s logged out!",loggedUser.getEmail()));
                 break;
 
             }catch (IOException | ClassNotFoundException e) {

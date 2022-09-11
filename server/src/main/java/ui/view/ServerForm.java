@@ -18,81 +18,81 @@ public class ServerForm extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        JLabel jLabel1 = new JLabel();
-        txtPort = new JFormattedTextField();
-        btnStartServer = new JButton();
-        btnStopServer = new JButton();
-        lblServerStatus = new JLabel();
-        pnlCurrentUsers = new JPanel();
-        JScrollPane scrlUsers = new JScrollPane();
-        tblActiveUsers = new JTable();
+        jLabel1 = new javax.swing.JLabel();
+        txtPort = new javax.swing.JFormattedTextField();
+        btnStartServer = new javax.swing.JButton();
+        btnStopServer = new javax.swing.JButton();
+        lblServerStatus = new javax.swing.JLabel();
+        pnlCurrentUsers = new javax.swing.JPanel();
+        scrlUsers = new javax.swing.JScrollPane();
+        tblActiveUsers = new javax.swing.JTable();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Podešavanja servera");
 
         jLabel1.setText("Port:");
 
         txtPort.setEditable(false);
         txtPort.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("####"))));
-        txtPort.setHorizontalAlignment(JTextField.CENTER);
+        txtPort.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         btnStartServer.setText("Pokreni server");
 
         btnStopServer.setText("Zaustavi server");
 
-        lblServerStatus.setHorizontalAlignment(SwingConstants.CENTER);
+        lblServerStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblServerStatus.setText("Server nije pokrenut");
 
-        pnlCurrentUsers.setBorder(BorderFactory.createTitledBorder("Aktivni korisnici"));
+        pnlCurrentUsers.setBorder(javax.swing.BorderFactory.createTitledBorder("Aktivni korisnici"));
 
         scrlUsers.setViewportView(tblActiveUsers);
 
-        GroupLayout pnlCurrentUsersLayout = new GroupLayout(pnlCurrentUsers);
+        javax.swing.GroupLayout pnlCurrentUsersLayout = new javax.swing.GroupLayout(pnlCurrentUsers);
         pnlCurrentUsers.setLayout(pnlCurrentUsersLayout);
         pnlCurrentUsersLayout.setHorizontalGroup(
-            pnlCurrentUsersLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            pnlCurrentUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(scrlUsers)
         );
         pnlCurrentUsersLayout.setVerticalGroup(
-            pnlCurrentUsersLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(scrlUsers, GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+            pnlCurrentUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scrlUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
         );
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnlCurrentUsers, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblServerStatus, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(btnStartServer, GroupLayout.PREFERRED_SIZE, 238, GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlCurrentUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblServerStatus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(btnStartServer, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnStopServer, GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
-                    .addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPort, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnStopServer, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtPort, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnStartServer)
                     .addComponent(btnStopServer))
                 .addGap(18, 18, 18)
-                .addComponent(lblServerStatus, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblServerStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnlCurrentUsers, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlCurrentUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -121,12 +121,14 @@ public class ServerForm extends JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JButton btnStartServer;
-    private JButton btnStopServer;
-    private JLabel lblServerStatus;
-    private JPanel pnlCurrentUsers;
-    private JTable tblActiveUsers;
-    private JFormattedTextField txtPort;
+    private javax.swing.JButton btnStartServer;
+    private javax.swing.JButton btnStopServer;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblServerStatus;
+    private javax.swing.JPanel pnlCurrentUsers;
+    private javax.swing.JScrollPane scrlUsers;
+    private javax.swing.JTable tblActiveUsers;
+    private javax.swing.JFormattedTextField txtPort;
     // End of variables declaration//GEN-END:variables
 
     private void prepareForm() {

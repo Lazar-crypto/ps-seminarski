@@ -30,8 +30,7 @@ public class MainPresenter extends Presenter {
                 return;
             }
 
-            UserDTO user = UserController.getInstance().login(loginForm.getTxtUsername().getText(),
-                    new String(loginForm.getTxtPassword().getPassword()));
+            UserDTO user = UserController.getInstance().login(username, password);
             loginForm.dispose();
             DialogForm.showInformationDialog(loginForm,"Uspesno ste se prijavili.","Prijava");
             super.form = new MainForm();
