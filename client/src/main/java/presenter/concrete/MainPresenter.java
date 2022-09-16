@@ -6,9 +6,6 @@ import exception.ServerUnavailableException;
 import presenter.Presenter;
 import view.dialog.DialogForm;
 import view.form.LoginForm;
-import view.form.MainForm;
-
-import javax.swing.*;
 
 public class MainPresenter extends Presenter {
 
@@ -22,7 +19,7 @@ public class MainPresenter extends Presenter {
 
     private void loginUser(LoginForm loginForm) {
         try{
-            //napraviti validaciju
+            //TODO napraviti validaciju
             String username = loginForm.getTxtUsername().getText();
             String password = String.valueOf(loginForm.getTxtPassword().getPassword());
             if(username.isEmpty() || password.isEmpty()){
@@ -34,6 +31,7 @@ public class MainPresenter extends Presenter {
             loginForm.dispose();
             DialogForm.showInformationDialog(loginForm,"Uspesno ste se prijavili.","Prijava");
             super.form = new MainForm();
+            super.show();
 
         }catch (ServerUnavailableException ex){
             DialogForm.showErrorDialog(null, ex.getMessage(),"Greska");

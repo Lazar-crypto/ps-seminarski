@@ -19,13 +19,16 @@ public class LoginForm extends javax.swing.JFrame {
         lblUsername = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Prijava");
 
+        lblPassword.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
         lblPassword.setText("Lozinka:");
 
+        lblUsername.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
         lblUsername.setText("Korisničko ime:");
 
+        btnLogin.setFont(new java.awt.Font("Liberation Sans", 0, 13)); // NOI18N
         btnLogin.setText("Prijavi se");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

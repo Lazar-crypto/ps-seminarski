@@ -33,10 +33,10 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public String findByCondition(String condition) {
+    public String find(String condition) {
         return  "SELECT *" +
-                " FROM " + getTableName() +
-                " WHERE " + condition + ";";
+                " FROM " + getTableName() + " "
+                + condition + ";";
     }
 
 }

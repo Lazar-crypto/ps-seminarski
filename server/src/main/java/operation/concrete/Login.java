@@ -1,10 +1,8 @@
 package operation.concrete;
 
-import dao.DAO;
 import dao.factory.DaoFactory;
 import dto.impl.UserDTO;
 import dto.impl.UserLoginDTO;
-import entity.Entity;
 import entity.implementation.User;
 import exception.UserNotFoundException;
 import lombok.extern.java.Log;
@@ -14,7 +12,6 @@ import repository.Repository;
 import server.ClientHandler;
 import ui.controller.ServerController;
 
-import java.util.List;
 import java.util.Objects;
 
 @Log
@@ -37,25 +34,21 @@ public class Login extends Operation {
     }
 
     @Override
-    protected UserDTO concreteOperationResponse() throws Exception {
+    protected UserDTO concreteOperationResponse() {
         if(super.repository == null)
             super.repository = new Repository();
-
         User user = (User) super.repository
-                .findByCondition(String.format("email = '%s' and password = '%s'", email, password),
+                .read(String.format("WHERE email = '%s' and password = '%s'", email, password),
                         Objects.requireNonNull(DaoFactory.create(User.class)))
                 .stream()
                 .findFirst()
                 .orElseThrow(() ->  new UserNotFoundException("Ne postoji korisnik!"));
-
        UserDTO userDto = UserDTOMapper.fromEntity(user);
-       
-        //dodaj usera u listu aktivnih
-        ServerController.getInstance().addUser(userDto);
-        clientHandler.setLoggedUser(userDto);
-
-        log.info("User logged in successfully");
-        return userDto;
+       //dodaj usera u listu aktivnih
+       ServerController.getInstance().addUser(userDto);
+       clientHandler.setLoggedUser(userDto);
+       log.info("User logged in successfully");
+       return userDto;
     }
 
     @Override

@@ -28,17 +28,18 @@ public class Repository {
     }
 
     public void rollbackTransaction() throws SQLException {
-        connection.commit();
+        connection.rollback();
+        ConnectionPool.releaseConnection(connection);
     }
 
     public Connection getConnection() {
         return connection;
     }
 
-    public List<Entity> findByCondition(String condition, DAO dao){
+    public List<Entity> read(String condition, DAO dao){
         List<Entity> entities = null;
         try {
-            Method find = dao.getClass().getMethod("findByCondition", String.class);
+            Method find = dao.getClass().getMethod("find", String.class);
             Method toEntity = dao.getClass().getMethod("toEntity", ResultSet.class);
 
             String findQuery = (String) find.invoke(dao, condition);
@@ -55,6 +56,7 @@ public class Repository {
             rs.close();
 
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException | SQLException e) {
+            e.printStackTrace();
             log.warning(e.getMessage());
         }
         return entities;
