@@ -12,13 +12,12 @@ import repository.Repository;
 import server.ClientHandler;
 import ui.controller.ServerController;
 
-import java.util.Objects;
-
 @Log
 public class Login extends Operation {
 
     private String email;
     private String password;
+    private final String CONDITION_QUERY =  "WHERE email = '%s' and password = '%s'";
 
     private final ClientHandler clientHandler;
 
@@ -38,13 +37,12 @@ public class Login extends Operation {
         if(super.repository == null)
             super.repository = new Repository();
         User user = (User) super.repository
-                .read(String.format("WHERE email = '%s' and password = '%s'", email, password),
-                        Objects.requireNonNull(DaoFactory.create(User.class)))
+                .read(String.format(CONDITION_QUERY, email, password), DaoFactory.create(User.class))
                 .stream()
                 .findFirst()
                 .orElseThrow(() ->  new UserNotFoundException("Ne postoji korisnik!"));
        UserDTO userDto = UserDTOMapper.fromEntity(user);
-       //dodaj usera u listu aktivnih
+       //add user to active ones
        ServerController.getInstance().addUser(userDto);
        clientHandler.setLoggedUser(userDto);
        log.info("User logged in successfully");

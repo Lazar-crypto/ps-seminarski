@@ -41,7 +41,6 @@ public class Repository {
         try {
             Method find = dao.getClass().getMethod("find", String.class);
             Method toEntity = dao.getClass().getMethod("toEntity", ResultSet.class);
-
             String findQuery = (String) find.invoke(dao, condition);
             log.info("Query for execution: " + findQuery);
 

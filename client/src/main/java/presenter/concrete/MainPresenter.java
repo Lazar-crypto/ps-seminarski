@@ -6,6 +6,7 @@ import exception.ServerUnavailableException;
 import presenter.Presenter;
 import view.dialog.DialogForm;
 import view.form.LoginForm;
+import view.form.MainForm;
 
 public class MainPresenter extends Presenter {
 
@@ -26,17 +27,18 @@ public class MainPresenter extends Presenter {
                 DialogForm.showInformationDialog(loginForm,"Podaci ne smeju biti prazni!","Probajte opet");
                 return;
             }
-
             UserDTO user = UserController.getInstance().login(username, password);
+            System.out.println(user.getName());
             loginForm.dispose();
             DialogForm.showInformationDialog(loginForm,"Uspesno ste se prijavili.","Prijava");
-            super.form = new MainForm();
+            super.form = new MainForm(user);
             super.show();
 
         }catch (ServerUnavailableException ex){
             DialogForm.showErrorDialog(null, ex.getMessage(),"Greska");
 
         } catch (Exception ex){
+            ex.printStackTrace();
             DialogForm.showErrorDialog(loginForm, ex.getMessage(),"Greska");
         }
 
